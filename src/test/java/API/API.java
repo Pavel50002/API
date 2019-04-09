@@ -6,6 +6,7 @@ import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -42,6 +43,15 @@ public class API {
         String usernames0 = response.jsonPath()
                 .getString("username[0]");
         System.out.println(usernames0);// выведет только первое имя из массива
+
+    }
+    @org.testng.annotations.Test
+    public void test() {
+
+        Response response = doGetRequest("https://jsonplaceholder.typicode.com/users/1");
+        Map<String, String> company = response.jsonPath().getMap("company"); //Здесь мы в стринговое значение company прсваиваем все что в него входит
+        System.out.println(company.get("name"));
+
 
     }
 }
